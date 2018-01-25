@@ -5,10 +5,14 @@ Coursera: Algorithms Part 1 - Princeton University
 Write a data type to represent a set of points in the unit square (all points have x- and y-coordinates between 0 and 1) using a 2d-tree to support efficient range search (find all of the points contained in a query rectangle) and nearest-neighbor search (find a closest point to a query point). 2d-trees have numerous applications, ranging from classifying astronomical objects to computer animation to speeding up neural networks to mining data to image retrieval.
 
 <p align="center">
-<img src="" width="50%">
+<img src="/pics/kdtree-ops.png" width="50%">
 </p>
 
 **Geometric primitives.** To get started, use the following geometric primitives for points and axis-aligned rectangles in the plane.
+
+<p align="center">
+<img src="/pics/RectHV.png" width="50%">
+</p>
 
 * The immutable data type Point2D (part of algs4.jar) represents points in the plane. Here is the subset of its API that you may use:
 ```
@@ -65,6 +69,22 @@ public class PointSET {
 *Corner cases.*  Throw a java.lang.IllegalArgumentException if any argument is null. Performance requirements.  Your implementation should support insert() and contains() in time proportional to the logarithm of the number of points in the set in the worst case; it should support nearest() and range() in time proportional to the number of points in the set.
 
 **2d-tree implementation.** Write a mutable data type KdTree.java that uses a 2d-tree to implement the same API (but replace PointSET with KdTree). A 2d-tree is a generalization of a BST to two-dimensional keys. The idea is to build a BST with points in the nodes, using the x- and y-coordinates of the points as keys in strictly alternating sequence.
+
+<p align="center">
+<img src="/pics/kdtree1.png" width="17%">
+<img src="/pics/kdtree2.png" width="17%">
+<img src="/pics/kdtree3.png" width="17%">
+<img src="/pics/kdtree4.png" width="17%">
+<img src="/pics/kdtree5.png" width="17%">
+</p>
+
+<p align="center">
+<img src="/pics/kdtree-insert1.png" width="17%">
+<img src="/pics/kdtree-insert2.png" width="17%">
+<img src="/pics/kdtree-insert3.png" width="17%">
+<img src="/pics/kdtree-insert4.png" width="17%">
+<img src="/pics/kdtree-insert5.png" width="17%">
+</p>
 
 * *Search and insert.* The algorithms for search and insert are similar to those for BSTs, but at the root we use the x-coordinate (if the point to be inserted has a smaller x-coordinate than the point at the root, go left; otherwise go right); then at the next level, we use the y-coordinate (if the point to be inserted has a smaller y-coordinate than the point in the node, go left; otherwise go right); then at the next level the x-coordinate, and so forth.
 
