@@ -2,7 +2,7 @@
 
 Coursera: Algorithms Part 1 - Princeton University
 
-Write a data type to represent a set of points in the unit square (all points have x- and y-coordinates between 0 and 1) using a 2d-tree to support efficient range search (find all of the points contained in a query rectangle) and nearest-neighbor search (find a closest point to a query point). 2d-trees have numerous applications, ranging from classifying astronomical objects to computer animation to speeding up neural networks to mining data to image retrieval.
+Write a data type to represent a set of points in the unit square (all points have x- and y-coordinates between 0 and 1) using a *2d-tree* to support efficient *range search* (find all of the points contained in a query rectangle) and *nearest-neighbor search* (find a closest point to a query point). 2d-trees have numerous applications, ranging from classifying astronomical objects to computer animation to speeding up neural networks to mining data to image retrieval.
 
 <p align="center">
 <img src="/pics/kdtree-ops.png" width="70%">
@@ -11,7 +11,7 @@ Write a data type to represent a set of points in the unit square (all points ha
 **Geometric primitives.** To get started, use the following geometric primitives for points and axis-aligned rectangles in the plane.
 
 <p align="center">
-<img src="/pics/RectHV.png" width="70%">
+<img src="/pics/RectHV.png" width="65%">
 </p>
 
 * The immutable data type Point2D (part of algs4.jar) represents points in the plane. Here is the subset of its API that you may use:
@@ -68,14 +68,14 @@ public class PointSET {
 
 *Corner cases.*  Throw a java.lang.IllegalArgumentException if any argument is null. Performance requirements.  Your implementation should support insert() and contains() in time proportional to the logarithm of the number of points in the set in the worst case; it should support nearest() and range() in time proportional to the number of points in the set.
 
-**2d-tree implementation.** Write a mutable data type KdTree.java that uses a 2d-tree to implement the same API (but replace PointSET with KdTree). A 2d-tree is a generalization of a BST to two-dimensional keys. The idea is to build a BST with points in the nodes, using the x- and y-coordinates of the points as keys in strictly alternating sequence.
+**2d-tree implementation.** Write a mutable data type KdTree.java that uses a 2d-tree to implement the same API (but replace PointSET with KdTree). A *2d-tree* is a generalization of a BST to two-dimensional keys. The idea is to build a BST with points in the nodes, using the x- and y-coordinates of the points as keys in strictly alternating sequence.
 
 <p align="center">
-<img src="/pics/kdtree1.png" width="17%">
-<img src="/pics/kdtree2.png" width="17%">
-<img src="/pics/kdtree3.png" width="17%">
-<img src="/pics/kdtree4.png" width="17%">
-<img src="/pics/kdtree5.png" width="17%">
+<img src="/pics/kdtree1.png" width="18%">
+<img src="/pics/kdtree2.png" width="18%">
+<img src="/pics/kdtree3.png" width="18%">
+<img src="/pics/kdtree4.png" width="18%">
+<img src="/pics/kdtree5.png" width="18%">
 </p>
 
 <p align="center">
@@ -92,9 +92,9 @@ public class PointSET {
 
 The prime advantage of a 2d-tree over a BST is that it supports efficient implementation of range search and nearest-neighbor search. Each node corresponds to an axis-aligned rectangle in the unit square, which encloses all of the points in its subtree. The root corresponds to the unit square; the left and right children of the root corresponds to the two rectangles split by the x-coordinate of the point at the root; and so forth.
 
-* *Range search.* To find all points contained in a given query rectangle, start at the root and recursively search for points in both subtrees using the following pruning rule: if the query rectangle does not intersect the rectangle corresponding to a node, there is no need to explore that node (or its subtrees). A subtree is searched only if it might contain a point contained in the query rectangle.
+* *Range search.* To find all points contained in a given query rectangle, start at the root and recursively search for points in *both* subtrees using the following *pruning rule*: if the query rectangle does not intersect the rectangle corresponding to a node, there is no need to explore that node (or its subtrees). A subtree is searched only if it might contain a point contained in the query rectangle.
 
-* *Nearest-neighbor search.* To find a closest point to a given query point, start at the root and recursively search in both subtrees using the following pruning rule: if the closest point discovered so far is closer than the distance between the query point and the rectangle corresponding to a node, there is no need to explore that node (or its subtrees). That is, search a node only only if it might contain a point that is closer than the best one found so far. The effectiveness of the pruning rule depends on quickly finding a nearby point. To do this, organize the recursive method so that when there are two possible subtrees to go down, you always choose the subtree that is on the same side of the splitting line as the query point as the first subtree to explore—the closest point found while exploring the first subtree may enable pruning of the second subtree.
+* *Nearest-neighbor search.* To find a closest point to a given query point, start at the root and recursively search in *both* subtrees using the following *pruning rule*: if the closest point discovered so far is closer than the distance between the query point and the rectangle corresponding to a node, there is no need to explore that node (or its subtrees). That is, search a node only only if it might contain a point that is closer than the best one found so far. The effectiveness of the pruning rule depends on quickly finding a nearby point. To do this, organize the recursive method so that when there are two possible subtrees to go down, you always choose *the subtree that is on the same side of the splitting line as the query point* as the first subtree to explore—the closest point found while exploring the first subtree may enable pruning of the second subtree.
 
 **Clients.**  You may use the following interactive client programs to test and debug your code.
 
@@ -104,8 +104,8 @@ The prime advantage of a 2d-tree over a BST is that it supports efficient implem
 
 **Analysis of running time and memory usage (optional and not graded).**
 
-* Give the total memory usage in bytes (using tilde notation) of your 2d-tree data structure as a function of the number of points n, using the memory-cost model from lecture and Section 1.4 of the textbook. Count all memory that is used by your 2d-tree, including memory for the nodes, points, and rectangles.
-* Give the expected running time in seconds (using tilde notation) to build a 2d-tree on n random points in the unit square. (Do not count the time to read in the points from standard input.)
+* Give the total memory usage in bytes (using tilde notation) of your 2d-tree data structure as a function of the number of points *n*, using the memory-cost model from lecture and Section 1.4 of the textbook. Count all memory that is used by your 2d-tree, including memory for the nodes, points, and rectangles.
+* Give the expected running time in seconds (using tilde notation) to build a 2d-tree on *n* random points in the unit square. (Do not count the time to read in the points from standard input.)
 * How many nearest-neighbor calculations can your 2d-tree implementation perform per second for input100K.txt (100,000 points) and input1M.txt (1 million points), where the query points are random points in the unit square? (Do not count the time to read in the points or to build the 2d-tree.) Repeat this question but with the brute-force implementation.
 
 **Submission.**  Submit only the files PointSET.java and KdTree.java. We will supply algs4.jar. Your may not call library functions except those in those in java.lang, java.util, and algs4.jar.
