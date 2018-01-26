@@ -49,7 +49,7 @@ public class RectHV {
 ```
 Do not modify these data types.
 
-**Brute-force implementation.** Write a mutable data type PointSET.java that represents a set of points in the unit square. Implement the following API by using a red–black BST:
+**Brute-force implementation.** Write a mutable data type *PointSET.java* that represents a set of points in the unit square. Implement the following API by using a red–black BST:
 ```
 public class PointSET {
    public         PointSET()                               // construct an empty set of points 
@@ -68,7 +68,7 @@ public class PointSET {
 
 *Corner cases.*  Throw a java.lang.IllegalArgumentException if any argument is null. Performance requirements.  Your implementation should support insert() and contains() in time proportional to the logarithm of the number of points in the set in the worst case; it should support nearest() and range() in time proportional to the number of points in the set.
 
-**2d-tree implementation.** Write a mutable data type KdTree.java that uses a 2d-tree to implement the same API (but replace PointSET with KdTree). A *2d-tree* is a generalization of a BST to two-dimensional keys. The idea is to build a BST with points in the nodes, using the x- and y-coordinates of the points as keys in strictly alternating sequence.
+**2d-tree implementation.** Write a mutable data type *KdTree.java* that uses a 2d-tree to implement the same API (but replace PointSET with KdTree). A *2d-tree* is a generalization of a BST to two-dimensional keys. The idea is to build a BST with points in the nodes, using the x- and y-coordinates of the points as keys in strictly alternating sequence.
 
 <p align="center">
 <img src="/pics/kdtree1.png" width="18%">
